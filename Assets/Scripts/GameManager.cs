@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     [SerializeField] private ApiClient api;
     [SerializeField] private List<PlayerController> players;
     public string gameId;
 
-    public void Start()
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    private void Start()
     {
         api.OnDataReceived += OnDataReceived;
     }
