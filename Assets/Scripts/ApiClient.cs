@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 
 public class ApiClient : MonoBehaviour
 {
-    [Tooltip("Set this in the inspector (e.g. http://192.168.42.21:5005/server)")]
     public string baseUrl = "http://localhost:5005/server";
+    public float sendInterval = 1f;
 
     public event Action<int, ServerData> OnDataReceived;
     public Transform playerTransform;
@@ -56,7 +56,7 @@ public class ApiClient : MonoBehaviour
             };
 
             StartCoroutine(PostPlayerData(GameManager.Instance.gameId, "0", data));
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(sendInterval);
         }
     }
 
